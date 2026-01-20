@@ -1,10 +1,8 @@
 import { useState, useEffect} from "react";
 import Post from "./Post";
-import NewPost from "../routes/NewPost";
-import Modal from './Modal';
 import classes from "./PostList.module.css";
 
-function PostsList({isPosting , onStopPosting}) {
+function PostsList() {
   const [posts, setPosts]= useState([]);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -34,21 +32,20 @@ function addPostHandler(postData){
   setPosts((existingPosts) => [postData, ... existingPosts]);
 }
 
-let modalContent;
+// let modalContent;
 
-if (isPosting){
-  modalContent = (
-    <Modal onClose={onStopPosting}>
-      <NewPost 
-        onCancel={onStopPosting}
-        onAddPost={addPostHandler}
-      />
-    </Modal>
-  );  
-}
+// if (isPosting){
+//   modalContent = (
+//     <Modal onClose={onStopPosting}>
+//       <NewPost 
+//         onCancel={onStopPosting}
+//         onAddPost={addPostHandler}
+//       />
+//     </Modal>
+//   );  
+// }
   return (
     <>
-      {modalContent}
       {!isFetching && posts.length > 0 &&  
         <ul className={classes.posts}>
           {posts.map((post) => <Post key ={post.body} author={post.author} body={post.body} />)}
